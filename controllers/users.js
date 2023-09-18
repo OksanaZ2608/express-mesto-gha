@@ -83,9 +83,6 @@ const updateAvatar = (req, res) => {
     });
 };
 
-const wrongUrl = (req, res) => res.status(ERROR_NOT_FOUND)
-  .send({ message: 'Неверный адрес страницы' });
-
 module.exports = {
-  getAllUsers, getUserId, createUser, updateProfile, updateAvatar, wrongUrl,
+  getAllUsers, getUserId, createUser, updateProfile, updateAvatar,
 };
