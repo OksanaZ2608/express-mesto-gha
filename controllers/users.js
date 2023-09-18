@@ -4,7 +4,7 @@ const { ERROR_VALIDATION, ERROR_NOT_FOUND, ERROR_SERVER } = require('../errors/e
 const getAllUsers = (req, res) => {
   User.find({})
     .then((users) => {
-      res.send(users)
+      res.send(users);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -12,8 +12,8 @@ const getAllUsers = (req, res) => {
       } else {
         res.status(ERROR_SERVER).send({ message: 'Произошла ошибка на сервере' })
       }
-    })
-}
+    });
+};
 
 const getUserId = (req, res) => {
   User.findById(req.params.userId)
