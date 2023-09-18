@@ -8,5 +8,5 @@ router.get('/:userId', getUserId);
 router.post('/', createUser);
 router.patch('/me', updateProfile);
 router.patch('/me/avatar', updateAvatar);
-router.patch('/*', wrongUrl);
+router.patch('/', wrongUrl);
 module.exports = router;
