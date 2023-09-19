@@ -4,12 +4,8 @@ const { ERROR_VALIDATION, ERROR_NOT_FOUND, ERROR_SERVER } = require('../errors/e
 module.exports.getCards = (req, res) => {
   Card.find({})
     .then((cards) => res.send(cards))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(ERROR_VALIDATION).send({ message: 'Переданы некорректные данные' });
-      } else {
-        res.status(ERROR_SERVER).send({ message: 'Произошла ошибка на сервере' });
-      }
+    .catch(() => {
+      res.status(ERROR_SERVER).send({ message: 'Произошла ошибка на сервере' });
     });
 };
 

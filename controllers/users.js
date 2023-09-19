@@ -1,17 +1,18 @@
 const User = require('../models/user');
-const { ERROR_VALIDATION, ERROR_NOT_FOUND, ERROR_SERVER } = require('../errors/errors');
+const {
+  ERROR_VALIDATION,
+  ERROR_NOT_FOUND,
+  ERROR_SERVER,
+  SUCCESSFUL_ANSWER,
+} = require('../errors/errors');
 
 const getAllUsers = (req, res) => {
   User.find({})
     .then((users) => {
       res.send(users);
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(ERROR_VALIDATION).send({ message: 'Переданы некорректные данные' });
-      } else {
-        res.status(ERROR_SERVER).send({ message: 'Произошла ошибка на сервере' });
-      }
+    .catch(() => {
+      res.status(ERROR_SERVER).send({ message: 'Произошла ошибка на сервере' });
     });
 };
 
@@ -36,7 +37,7 @@ const createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   User.create({ name, about, avatar })
     .then((user) => {
-      res.send(user);
+      res.status(SUCCESSFUL_ANSWER).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
