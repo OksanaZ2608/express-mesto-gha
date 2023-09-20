@@ -6,9 +6,7 @@ const ForbiddenError = require('../errors/ForbiddenError');
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => res.send(cards))
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 module.exports.createCard = (req, res, next) => {
@@ -25,7 +23,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCardId = (req, res, next) => {
-  Card.findByIdAndDelete(req.params.cardId)
+  Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
